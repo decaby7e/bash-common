@@ -13,6 +13,14 @@
 #      Variables      #
 #~#~#~#~#~#~#~#~#~#~#~#
 
+## Color Variables ##
+
+RED='\033[0;31m'    # Red
+L_RED='\033[1;31m'  # Light red
+YELLOW='\033[1;33m' # Yellow
+WHITE='\033[1;34m'  # White
+ORANGE='\033[0;33m' # Orange
+NC='\033[0m'        # No Color
 
 ## Path Variables ##
 
@@ -31,13 +39,35 @@ FULL_PATH="`( cd \"$REL_PATH\" && pwd )`"
 ## Logging Variables ##
 
 #
+# For use when debugging scripts. Should be removed
+# in production scripts...
+#
+# Usage: debug "Debug Message"
+#
+debug(){
+  printf "${ORANGE}[ DEBUG ]${NC} $1\n"
+}
+
+#
+# For use with any kind of common info to be
+# displayed to the terminal. Should allow for
+# sparse use of printf and echo in giving the
+# user information.
+#
+# Usage: info "Information Message"
+#
+info(){
+  printf "${WHITE}[ INFO ] ${NC} $1\n"
+}
+
+#
 # Warn the user of a serious error but one
 # that is not serious enough to cause a crash
 #
 # Usage: warn "Warning Message"
 #
 warn(){
-  echo "[WARNING] $1"
+  printf "${YELLOW}[WARNING]${NC} $1\n"
 }
 
 #
@@ -47,7 +77,7 @@ warn(){
 # Usage: fatal "Error Message"
 #
 fatal(){
-  echo "[ FATAL ] $1"
+  printf "${RED}[ FATAL ]${NC} $1\n"
   exit 1
 }
 
