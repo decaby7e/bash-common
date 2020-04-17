@@ -6,7 +6,7 @@
 # and variables to reduce reused code in many
 # bash scripts
 #
-# decaby7e - 2020.01.17
+# decaby7e - 2020.01.21
 
 
 #~#~#~#~#~#~#~#~#~#~#~#
@@ -97,16 +97,33 @@ try(){
   fatal "Failed exception!"
 }
 
-## Privilage Checks ##
+## Checks ##
 
 #
 # Will check if user is root. If not, it will throw
 # a fatal error and notify the user to use root.
 #
-# Usage: is_root
+# Usage: root_check
 #
-is_root(){
+root_check(){
   if [ "$EUID" -ne 0 ]; then
     fatal "Must be run as root."
   fi
 }
+
+#
+# Will check if user provided arguments. Takes the
+# expected ammount of arguments as input
+#
+# Usage: arg_check ARG_COUNT
+# CURRENTLY INCOMPLETE
+#
+arg_check(){
+  echo $(echo $#)
+}
+
+#~#~#~#~#~#~#~#~#~#~#~#
+#    Compatibility    #
+#~#~#~#~#~#~#~#~#~#~#~#
+
+is_root(){ root_check; } # 2020.01.21 Changed is_root name to root_check
