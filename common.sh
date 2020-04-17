@@ -45,7 +45,7 @@ FULL_PATH="`( cd \"$REL_PATH\" && pwd )`"
 # Usage: debug "Debug Message"
 #
 debug(){
-  printf "${ORANGE}[ DEBUG ]${NC} $1\n"
+  printf '\033[0;33m'[ DEBUG ]'\033[0m' $1\n"
 }
 
 #
@@ -57,7 +57,7 @@ debug(){
 # Usage: info "Information Message"
 #
 info(){
-  printf "${WHITE}[ INFO ] ${NC} $1\n"
+  printf "'\033[1;34m'[ INFO ]'\033[0m' $1\n"
 }
 
 #
@@ -67,7 +67,7 @@ info(){
 # Usage: warn "Warning Message"
 #
 warn(){
-  printf "${YELLOW}[WARNING]${NC} $1\n"
+  printf "'\033[1;33m'[WARNING]'\033[0m' $1\n"
 }
 
 #
@@ -77,24 +77,8 @@ warn(){
 # Usage: fatal "Error Message"
 #
 fatal(){
-  printf "${RED}[ FATAL ]${NC} $1\n"
+  printf "'\033[0;31m'[ FATAL ] $1\n"
   exit 1
-}
-
-
-## Try-Catch Functions ##
-
-#
-# Will attempt to run a command. On faliure,
-# the specified execption is run. Should both
-# fail, a fatal error is thrown.
-#
-# Usage: try "helloworld" "echo 'Oops! That command isn\'t real \:\\' "
-#
-try(){
-  sh -c $1 ||\
-  sh -c $2 ||\
-  fatal "Failed exception!"
 }
 
 ## Checks ##
@@ -110,20 +94,3 @@ root_check(){
     fatal "Must be run as root."
   fi
 }
-
-#
-# Will check if user provided arguments. Takes the
-# expected ammount of arguments as input
-#
-# Usage: arg_check ARG_COUNT
-# CURRENTLY INCOMPLETE
-#
-arg_check(){
-  echo $(echo $#)
-}
-
-#~#~#~#~#~#~#~#~#~#~#~#
-#    Compatibility    #
-#~#~#~#~#~#~#~#~#~#~#~#
-
-is_root(){ root_check; } # 2020.01.21 Changed is_root name to root_check
