@@ -27,8 +27,7 @@ NC='\033[0m'        # No Color
 #
 # Return the full path of a running script
 #
-REL_PATH="`dirname \"$0\"`"
-FULL_PATH="`( cd \"$REL_PATH\" && pwd )`"
+SCRIPT_PATH=$(dirname $(realpath -s $0))
 
 
 #~#~#~#~#~#~#~#~#~#~#~#
@@ -93,4 +92,22 @@ root_check(){
   if [ "$EUID" -ne 0 ]; then
     fatal "Must be run as root."
   fi
+}
+
+#
+# Will lock a script to prevent several instances running
+# at the same time.
+# 
+# Alternative in one line from http://man7.org/linux/man-pages/man1/flock.1.html
+#
+# [ "${FLOCKER}" != "$0" ] && exec env FLOCKER="$0" flock -en "$0" "$0" "$@" || :
+#
+# Usage: lock_self
+# 
+#
+lock_self(){
+  LOCK_FILE=a.lock
+  exec 100>"$LOCK_FILE"
+  flock -n 100 ||\
+  fatal "Script currently running."
 }
