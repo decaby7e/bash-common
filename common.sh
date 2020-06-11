@@ -24,9 +24,7 @@ NC='\033[0m'        # No Color
 
 ## Path Variables ##
 
-#
 # Return the full path of a running script
-#
 SCRIPT_PATH=$(dirname $(realpath -s $0))
 
 
@@ -39,22 +37,22 @@ SCRIPT_PATH=$(dirname $(realpath -s $0))
 
 # Usage: debug 'Debug Message'
 debug(){
-  printf "'\033[0;33m'Debug'\033[0m' $1\n"
+  printf "\033[0;33mDEBUG\033[0m  $1\n"
 }
 
 # Usage: info 'Information Message'
 info(){
-  printf "'\033[1;34m'Info'\033[0m' $1\n"
+  printf "\033[1;34mINFO\033[0m   $1\n"
 }
 
 # Usage: warn 'Warning Message'
 warn(){
-  printf "'\033[1;33m'Warn'\033[0m' $1\n"
+  printf "\033[1;33mWARN\033[0m   $1\n"
 }
 
 # Usage: fatal 'Error Message'
 fatal(){
-  printf "'\033[0;31m'Fatal $1\n"
+  printf "\033[0;31mFATAL  $1\033[0m\n"
   exit 1
 }
 
