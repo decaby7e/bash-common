@@ -17,6 +17,7 @@
 
 RED='\033[0;31m'    # Red
 L_RED='\033[1;31m'  # Light red
+GREEN='\033[0;32m'  # Green
 YELLOW='\033[1;33m' # Yellow
 WHITE='\033[1;34m'  # White
 ORANGE='\033[0;33m' # Orange
