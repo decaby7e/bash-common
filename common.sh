@@ -78,3 +78,8 @@ lock_self(){
   flock -n 100 ||\
   fatal "Script currently running."
 }
+
+
+dehumanize(){
+    awk '/[0-9]$/{print $1;next};/[gG]$/{printf "%u\n", $1*(1024*1024*1024);next};/[mM]$/{printf "%u\n", $1*(1024*1024);next};/[kK]$/{printf "%u\n", $1*1024;next}' <(echo $1)
+}
