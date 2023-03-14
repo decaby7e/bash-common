@@ -38,22 +38,22 @@ SCRIPT_PATH=$(dirname $(realpath -s $0))
 
 # Usage: debug 'Debug Message'
 debug(){
-  printf "\033[0;33mDEBUG\033[0m  $1\n"
+  printf '\033[0;33mDEBUG\033[0m  %s\n' "$1"
 }
 
 # Usage: info 'Information Message'
 info(){
-  printf "\033[1;34mINFO\033[0m   $1\n"
+  printf '\033[1;34mINFO\033[0m   %s\n' "$1"
 }
 
 # Usage: warn 'Warning Message'
 warn(){
-  printf "\033[1;33mWARN\033[0m   $1\n"
+  printf '\033[1;33mWARN\033[0m   %s\n' "$1"
 }
 
 # Usage: fatal 'Error Message'
 fatal(){
-  printf "\033[0;31mFATAL  $1\033[0m\n"
+  printf '\033[0;31mFATAL  %s\033[0m\n' "$1"
   exit 1
 }
 
